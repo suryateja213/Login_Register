@@ -1,0 +1,171 @@
+<div class="dashboard-container">
+  <!-- Left Section: Product Table -->
+  <div class="product-table-section">
+    <!-- Product Table Section -->
+    <div *ngIf="groupedProducts.length > 0; else noProducts">
+      <h3 class="section-title">Product List</h3>
+
+      <div class="table-container">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <!-- New Column for Checkbox -->
+              <th class="table-header">Product Name</th>
+              <th class="table-header">Status</th>
+              <th class="table-header">Category</th>
+              <th class="table-header">Vendors</th>
+              <th class="table-header">Quantity in Stock</th>
+              <th class="table-header">Unit Price</th>
+              <th class="table-header">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop through each product group grouped by product name) -->
+            <ng-container *ngFor="let group of groupedProducts">
+              <ng-container *ngFor="let product of group.products">
+                <tr class="table-row">
+                  <!-- Product Name and Image -->
+                  <td>
+                    <div class="product-info">
+                      <img [src]="product.product_name_and_image_combined.image"
+                           alt="{{ product.product_name_and_image_combined.name }}"
+                           class="product-image" />
+                      <span class="product-name">{{ product.product_name_and_image_combined.name }}</span>
+                    </div>
+                  </td>
+
+                  <!-- Display Status -->
+                  <td>
+                    <span *ngIf="product.status === 1" class="status available">Available</span>
+                    <span *ngIf="product.status === 0" class="status not-available">Not Available</span>
+                    <span *ngIf="product.status === 99" class="status deleted">Deleted</span>
+                  </td>
+
+                  <!-- Display Category -->
+                  <td>{{ product.category }}</td>
+
+                  <!-- Display Vendors -->
+                  <td>
+                    <span *ngFor="let vendor of product.vendors; let last = last" class="vendor">
+                      {{ vendor }}<span *ngIf="!last">, </span>
+                    </span>
+                  </td>
+
+                  <!-- Display Quantity in Stock -->
+                  <td>{{ product.quantity }}</td>
+
+                  <!-- Display Unit Price -->
+                  <td class="price">{{ product.unit | currency }}</td>
+                  <td>
+                    <!-- Edit Button -->
+                    <button (click)="onEditProduct(product)">Edit</button>
+                    <!-- Download Button -->
+                    <button (click)="onDownloadProduct(product)">Download</button>
+                    <!-- Delete Button -->
+                    <button (click)="onDeleteProduct(product)">Delete</button>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+        <!-- Edit Product Modal -->
+<div *ngIf="productToEdit" class="edit-modal">
+  <h2>Edit Product</h2>
+  <form [formGroup]="updatedProductForm" (ngSubmit)="onUpdateProduct()">
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" formControlName="product_name" />
+
+    <label for="quantityInStock">Quantity in Stock:</label>
+    <input type="number" id="quantityInStock" formControlName="quantity_in_stock" />
+
+    <label for="unitPrice">Unit Price:</label>
+    <input type="number" id="unitPrice" formControlName="unit_price" />
+
+    <!-- Vendors (List the vendors associated with the product) -->
+    <label for="vendors">Vendors:</label>
+    <select id="vendors" multiple formControlName="vendors">
+      <option *ngFor="let vendor of productToEdit.vendors" [value]="vendor.vendor_id">{{ vendor.vendor_name }}</option>
+    </select>
+
+    <button type="submit" [disabled]="updatedProductForm.invalid">Update Product</button>
+    <button type="button" (click)="productToEdit = null">Cancel</button>
+  </form>
+</div>
+      </div>
+    </div>
+
+    <!-- Template for when no products are available -->
+    <ng-template #noProducts>
+      <p class="no-products">No products available.</p>
+    </ng-template>
+
+    <!-- Error Message for Product Fetch -->
+    <div *ngIf="productError" class="error-message">
+      <p>{{ productError }}</p>
+    </div>
+
+  
+
+
+    <!-- Pagination Controls -->
+    <div *ngIf="!loading" class="pagination-controls">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pagination-button">
+        Previous
+      </button>
+      <span class="pagination-text">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pagination-button">
+        Next
+      </button>
+    </div>
+
+    <!-- Show loading state if data is being fetched -->
+    <div *ngIf="loading" class="loading-spinner">
+      <p>Loading products...</p>
+    </div>
+  </div>
+
+  <!-- Right Section: Profile Section and File Upload -->
+  <div class="file-upload-section">
+    <!-- Dashboard Header with Profile Section -->
+    <div class="dashboard-header">
+      <div class="user-info" (click)="toggleDropdown()">
+        <!-- Profile Image -->
+        <div class="profile-picture">
+          <img *ngIf="!loading && profileImageUrl" [src]="profileImageUrl" alt="Profile Image" class="profile-img" />
+          <!-- Default Profile Icon if image is null -->
+          <i *ngIf="!profileImageUrl && !loading" class="fas fa-user-circle default-profile-icon"></i>
+        </div>
+
+        <!-- User Details -->
+        <div class="user-details">
+          <h4>{{ user.username || 'Username' }}</h4>
+          <p>{{ user.email || 'Email not available' }}</p>
+        </div>
+      </div>
+
+      <!-- Dropdown Menu -->
+      <div *ngIf="dropdownVisible" class="dropdown-menu">
+        <button (click)="onUpdateProfilePicture()">Update Profile Picture</button>
+        <button (click)="onLogout()">Logout</button>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading">
+        Loading...
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="error" class="error">
+        {{ error }}
+      </div>
+    </div>
+
+    <!-- File Upload Section -->
+    <div class="file-upload-container">
+      <!-- Include your file upload logic and UI components here -->
+      <!-- <h3 class="section-title">Upload Product Data</h3>
+      <input type="file" (change)="onFileUpload($event)" />
+    </div>
+  </div>
+</div> -->

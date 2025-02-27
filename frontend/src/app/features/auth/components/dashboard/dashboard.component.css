@@ -1,0 +1,482 @@
+/* Dashboard Header */
+.dashboard-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 12px 24px; /* Increased padding for better spacing */
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Slightly darker shadow */
+  border-bottom: 1px solid #eaeaea; /* Subtle border for separation */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative; /* Ensures dropdown aligns properly */
+}
+
+.profile-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.default-profile-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.default-profile-icon i {
+  font-size: 20px;
+  color: #6c757d;
+}
+
+.user-details {
+  text-align: left;
+}
+
+.user-details h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.user-details p {
+  margin: 0;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 180px; /* Fixed width for consistency */
+  margin-top: 10px; /* Small gap for dropdown */
+}
+
+.dropdown-menu button {
+  padding: 12px 15px;
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  width: 100%;
+  color: #495057;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border-bottom: 1px solid #f1f1f1; /* Light border between options */
+}
+
+.dropdown-menu button:hover {
+  background-color: #f8f9fa;
+}
+
+/* Loading and Error Styles */
+.loading {
+  text-align: center;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Product Table */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 100px; /* Added top margin to avoid overlap with fixed header */
+}
+
+.product-table th,
+.product-table td {
+  padding: 14px 20px; /* Improved padding for better spacing */
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.product-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+}
+
+.product-table td {
+  font-size: 14px;
+  color: #343a40;
+}
+
+.vendors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.vendors span {
+  display: inline-block;
+  font-size: 13px;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.quantity,
+.unit-price {
+  text-align: center;
+  font-weight: 500;
+}
+
+.status {
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Product Info */
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+/* Product Image */
+.product-info img {
+  width: 42px;  /* Same size as profile image */
+  height: 42px; /* Same size as profile image */
+  border-radius: 50%; /* Optional: make the image circular */
+  object-fit: cover; /* Maintain aspect ratio */
+  margin-right: 12px; /* Consistent margin with profile image */
+}
+
+.product-info span {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+/* Adjustments for status indicators */
+.status span {
+  font-weight: 600;
+}
+
+.status span.Available {
+  color: #28a745; /* Green color for Available */
+}
+
+.status span.Not-Available {
+  color: #dc3545; /* Red color for Not Available */
+}
+
+.status span.Deleted {
+  color: #6c757d; /* Grey color for Deleted */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 10px 16px;
+  }
+
+  .user-info {
+    flex-direction: row;
+  }
+
+  .product-table th,
+  .product-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .dropdown-menu {
+    width: 160px;
+  }
+
+  .product-info img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .product-info span {
+    font-size: 13px;
+  }
+
+  .pagination-controls {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 8px 12px;
+  }
+
+  .product-table th,
+  .product-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .dropdown-menu {
+    width: 150px;
+  }
+
+  .user-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-info img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .product-info span {
+    font-size: 12px;
+  }
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.pagination-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 25px; /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  margin: 0 8px; /* Spacing between buttons */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a floating effect */
+}
+
+.pagination-button:disabled {
+  background-color: #B0B0B0;
+  cursor: not-allowed;
+  box-shadow: none; /* Remove shadow for disabled state */
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-2px); /* Subtle hover effect for interactivity */
+}
+
+.pagination-text {
+  font-size: 14px;
+  color: #333;
+  margin: 0 15px;
+}
+
+.pagination-text strong {
+  color: #007BFF;
+}
+
+.pagination-controls .page-info {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0 10px;
+}
+
+.pagination-controls .pagination-info {
+  display: flex;
+  align-items: center;
+}
+
+.pagination-controls .pagination-info span {
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.pagination-controls .pagination-info span.current-page {
+  font-weight: 600;
+  color: #007BFF;
+}
+
+/* Responsive Styles for Pagination */
+@media (max-width: 768px) {
+  .pagination-button {
+    padding: 8px 16px;
+    font-size: 13px;
+    margin: 0 6px;
+  }
+
+  .pagination-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-button {
+    padding: 8px 14px;
+    font-size: 12px;
+    margin: 0 4px;
+  }
+
+  .pagination-text {
+    font-size: 12px;
+  }
+}
+
+
+button {
+  margin: 5px;
+  padding: 8px;
+  background-color: #4CAF50; /* Green for edit */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button.delete {
+  background-color: #f44336; /* Red for delete */
+}
+
+button.delete:hover {
+  background-color: #e53935;
+}
+
+/* Container for the modal */
+.edit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Modal box */
+.edit-modal h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.edit-modal form {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Label styling */
+.edit-modal label {
+  display: block;
+  margin: 8px 0 4px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Input fields */
+.edit-modal input[type="text"],
+.edit-modal input[type="number"],
+.edit-modal select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.edit-modal input[type="number"]:focus,
+.edit-modal input[type="text"]:focus,
+.edit-modal select:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+/* Button styling */
+.edit-modal button[type="submit"] {
+  background-color: #0066cc;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.edit-modal button[type="submit"]:hover {
+  background-color: #005bb5;
+}
+
+.edit-modal button[type="button"] {
+  background-color: #ccc;
+  color: #333;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-modal button[type="button"]:hover {
+  background-color: #bbb;
+}
+
+/* Disable the submit button if form is invalid */
+.edit-modal button[disabled] {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .edit-modal form {
+    padding: 20px;
+  }
+  
+  .edit-modal button[type="submit"],
+  .edit-modal button[type="button"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
